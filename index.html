@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta property="og:title" content="Belated Happy Birthday, Sir Awais"><meta property="og:description" content="A small page, built with what you taught me."><meta property="og:image" content="https://sir-awais.skillfilled.workers.dev/assets/preview.jpg"><meta name="theme-color" content="#FFF8EE">
+<meta property="og:title" content="Belated Happy Birthday, Sir Awais"><meta property="og:description" content="A small page, built with what you taught me."><meta property="og:image" content="https://sir-awais.skillfilled.workers.dev/preview.jpg"><meta name="theme-color" content="#FFF8EE">
 <title>Belated Happy Birthday, Sir Awais</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +52,7 @@ h1{font:600 clamp(2.4rem,5.4vw,4rem)/1.08 var(--serif);letter-spacing:-.01em}
 .photo-wrap{position:relative}
 .photo{border:1px solid var(--line);box-shadow:0 18px 40px rgba(19,32,58,.18)}
 .wish{text-align:center;padding-top:80px;padding-bottom:80px;overflow:hidden}
-.wish::before{content:"";position:absolute;inset:0;background:url(assets/party.webp) center/cover;filter:blur(5px) brightness(.4);transform:scale(1.08)}
+.wish::before{content:"";position:absolute;inset:0;background:url(party.webp) center/cover;filter:blur(5px) brightness(.4);transform:scale(1.08)}
 .wish>*{position:relative;z-index:1}
 .wish .cake{filter:drop-shadow(0 0 40px rgba(255,190,90,.4))}
 .tcard{max-width:420px;margin:0 auto 28px;text-align:center;background:#0B0F1C;border:1px solid #2A3150;border-radius:20px;padding:36px 28px}
@@ -303,7 +303,7 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
     <div class="term" id="term" aria-label="Terminal"></div>
   </div>
   <div class="photo-wrap">
-    <div class="photo"><img src="assets/sir.webp" alt="Sir Awais at his desk"></div>
+    <div class="photo"><img src="sir.webp" alt="Sir Awais at his desk"></div>
   </div>
 </header>
 
@@ -356,7 +356,7 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
 <div id="door" role="dialog" aria-modal="true" aria-label="Opened by Sir Awais">
   <button id="shut">Close</button>
   <div class="scene">
-    <div class="frame"><div class="room"><img src="assets/sir.webp" alt="Sir Awais welcoming you"></div><div class="leaf l"></div><div class="leaf r"></div><div class="say" id="say"></div></div>
+    <div class="frame"><div class="room"><img src="sir.webp" alt="Sir Awais welcoming you"></div><div class="leaf l"></div><div class="leaf r"></div><div class="say" id="say"></div></div>
     <div class="inside" id="inside"></div>
   </div>
 </div>
@@ -364,11 +364,11 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
 <script>
 // Edit the content here
 const PROJECTS=[
-  {t:"Shikari",d:"Finds winning products and works out the profit.",img:"assets/shikari.webp"},
-  {t:"AI Marketing Agent",d:"Writes, schedules and publishes posts.",img:"assets/marketing.webp"},
-  {t:"Leaders Academia Agent",d:"A WhatsApp admissions agent with a live dashboard.",img:"assets/leaders.webp"},
-  {t:"HR Recruitment System",d:"Ranks CVs against the job in seconds.",img:"assets/hr.webp"},
-  {t:"Carousel Posting Agent",d:"Creates and posts Instagram carousels.",img:"assets/carousel.webp"}
+  {t:"Shikari",d:"Finds winning products and works out the profit.",img:"shikari.webp"},
+  {t:"AI Marketing Agent",d:"Writes, schedules and publishes posts.",img:"marketing.webp"},
+  {t:"Leaders Academia Agent",d:"A WhatsApp admissions agent with a live dashboard.",img:"leaders.webp"},
+  {t:"HR Recruitment System",d:"Ranks CVs against the job in seconds.",img:"hr.webp"},
+  {t:"Carousel Posting Agent",d:"Creates and posts Instagram carousels.",img:"carousel.webp"}
 ];
 const SITE={t:"Skill Filled Academia",d:"You taught me, I built it anyway.",url:"https://skill-filled-academia.skillfilled.workers.dev/"};
 
