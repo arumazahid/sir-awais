@@ -9,9 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#FBF8FF; --panel:#fff; --ink:#13203A; --muted:#5B6779;
-  --line:#E4DCF3; --blue:#1E4ED8; --sky:#E6EEFB;
-  --coral:#FF6B6B; --sun:#FFC83D; --mint:#2FC4A0; --lilac:#9B7BFF; --pink:#FF8FB1;
+  --bg:#FAF8F3; --panel:#fff; --ink:#13203A; --muted:#5B6779;
+  --line:#E6DFD0; --blue:#1E4ED8; --sky:#E6EEFB;
+  --coral:#B5645A; --sun:#C9A24B; --mint:#5E8C7B; --lilac:#6F6A9E; --pink:#B98A9C;
   --serif:'Newsreader',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
   --mono:ui-monospace,Menlo,Consolas,monospace;
 }
@@ -24,7 +24,7 @@ a{color:var(--blue)}
 
 /* hero */
 .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:72px 0 56px}
-.hero p.hi{display:inline-block;background:var(--sun);font-weight:700;padding:6px 16px;border-radius:999px;margin-bottom:16px}
+.hero p.hi{display:inline-block;background:#0E1424;color:#E8D9A8;font-weight:500;letter-spacing:.04em;padding:6px 16px;border-radius:999px;margin-bottom:16px}
 h1{font:600 clamp(2.4rem,5.4vw,4rem)/1.08 var(--serif);letter-spacing:-.01em}
 .sub{color:var(--muted);margin:18px 0 28px;max-width:46ch}
 .term{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;font:15px/1.7 var(--mono);min-height:210px}
@@ -49,7 +49,7 @@ h1{font:600 clamp(2.4rem,5.4vw,4rem)/1.08 var(--serif);letter-spacing:-.01em}
 @keyframes bob{to{transform:translateY(-16px) rotate(3deg)}}
 .fl{width:44px;height:44px;position:absolute}
 .photo-wrap{position:relative}
-.photo{border:6px solid #fff;box-shadow:0 0 0 4px var(--pink)}
+.photo{border:1px solid var(--line);box-shadow:0 18px 40px rgba(19,32,58,.18)}
 .wish{text-align:center;padding-top:80px;padding-bottom:80px;overflow:hidden}
 .wish::before{content:"";position:absolute;inset:0;background:url(assets/party.jpg) center/cover;filter:blur(5px) brightness(.4);transform:scale(1.08)}
 .wish>*{position:relative;z-index:1}
@@ -156,21 +156,49 @@ footer{padding:40px 0 64px;color:var(--muted);border-top:1px solid var(--line);m
 }
 @media(max-width:540px){.grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+
+/* ===== luxe theme: midnight navy + gold, with gentle motion ===== */
+@property --a{syntax:'<angle>';initial-value:0deg;inherits:false}
+:root{--bg:#0B1020;--panel:#121A2E;--ink:#F3EBDD;--muted:#B9B2A2;--line:#2A3150;--blue:#E8D9A8;--sky:#16203A}
+body{background:#0B1020;color:var(--ink)}
+body::before{content:"";position:fixed;inset:-20%;z-index:0;pointer-events:none;
+  background:radial-gradient(700px 500px at 12% 8%,rgba(201,162,75,.22),transparent 65%),
+  radial-gradient(800px 600px at 88% 25%,rgba(111,106,158,.30),transparent 65%),
+  radial-gradient(900px 700px at 50% 100%,rgba(94,140,123,.20),transparent 65%);
+  animation:drift 16s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(4%,3%) scale(1.1)}}
+main,footer{position:relative;z-index:1}
+#sparks{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+h1{background:linear-gradient(100deg,#F3EBDD 0%,#E8D9A8 35%,#C9A24B 50%,#F3EBDD 70%);background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:-200% center}}
+.hero p.hi{background:linear-gradient(90deg,#C9A24B,#E8D9A8);color:#0B1020;font-weight:700}
+.term{background:rgba(18,26,46,.75);border-color:#3A3F63;backdrop-filter:blur(6px)}
+.photo-wrap{animation:float 7s ease-in-out infinite alternate}
+@keyframes float{to{transform:translateY(-10px)}}
+.photo-wrap::before{content:"";position:absolute;inset:-4px;border-radius:18px;
+  background:conic-gradient(from var(--a),#C9A24B,#6F6A9E,#5E8C7B,#E8D9A8,#C9A24B);animation:spin 8s linear infinite}
+.photo-wrap::after{content:"";position:absolute;inset:8% 6%;z-index:-1;background:rgba(201,162,75,.35);filter:blur(50px)}
+@keyframes spin{to{--a:360deg}}
+.photo{position:relative;z-index:1;border:0}
+.dark{background-color:rgba(14,20,36,.62)}
+.btn{background:#F3EBDD;color:#0B1020}
+.btn.gold{background:linear-gradient(90deg,#C9A24B,#E8D9A8);color:#0B1020;transition:transform .2s,box-shadow .2s}
+.btn.gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,162,75,.4)}
+.card{background:rgba(18,26,46,.8);backdrop-filter:blur(4px)}
+.card:hover{box-shadow:0 14px 34px rgba(201,162,75,.2)}
+.card.site{background:linear-gradient(135deg,#1B2747,#2A2350)}
+.say{color:#0B1020}.shot p{color:#13203A}#shut{color:#0B1020}
+footer{color:var(--muted)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="fl" viewBox="0 0 40 40"><g fill="currentColor"><circle cx="20" cy="9" r="8"/><circle cx="31" cy="17" r="8"/><circle cx="27" cy="30" r="8"/><circle cx="13" cy="30" r="8"/><circle cx="9" cy="17" r="8"/></g><circle cx="20" cy="20" r="6" fill="#FFC83D"/></symbol>
-  <symbol id="bl" viewBox="0 0 40 60"><ellipse cx="20" cy="20" rx="16" ry="19" fill="currentColor"/><path d="M20 39l-4 6h8z" fill="currentColor"/><path d="M20 45c-5 6 5 8 0 14" stroke="#9aa3b2" fill="none"/></symbol>
-</svg>
 <canvas id="fx"></canvas>
-<div class="bunting" id="bunting" aria-hidden="true"></div>
 <main class="wrap">
 
 <header class="hero">
-  <svg class="balloon" viewBox="0 0 40 60" style="left:-34px;top:8px;color:var(--coral)" aria-hidden="true"><use href="#bl"/></svg>
-  <svg class="balloon" viewBox="0 0 40 60" style="right:-30px;top:40%;color:var(--sun);animation-delay:-2s" aria-hidden="true"><use href="#bl"/></svg>
-  <svg class="balloon" viewBox="0 0 40 60" style="left:46%;top:-18px;color:var(--lilac);animation-delay:-3.5s" aria-hidden="true"><use href="#bl"/></svg>
   <div>
     <p class="hi">Belated Happy Birthday, Sir</p>
     <h1>Everything on this page started with you.</h1>
@@ -179,28 +207,14 @@ footer{padding:40px 0 64px;color:var(--muted);border-top:1px solid var(--line);m
   </div>
   <div class="photo-wrap">
     <div class="photo"><img src="assets/sir.png" alt="Sir at his desk"></div>
-    <svg class="fl" viewBox="0 0 40 40" style="left:-18px;top:-18px;color:var(--pink)" aria-hidden="true"><use href="#fl"/></svg>
-    <svg class="fl" viewBox="0 0 40 40" style="right:-16px;bottom:-16px;color:var(--lilac)" aria-hidden="true"><use href="#fl"/></svg>
   </div>
 </header>
 
 <section class="wish dark" id="wish">
   <h2>A surprise for you, Sir</h2>
   <p class="lead">Make a wish, then blow out the candles.</p>
-  <svg class="cake" viewBox="0 0 260 260" role="img" aria-label="Birthday cake with lit candles">
-    <defs>
-      <linearGradient id="cr" x1="0" x2="1"><stop offset="0" stop-color="#EAD7B8"/><stop offset=".5" stop-color="#FFF7E8"/><stop offset="1" stop-color="#E6D0AE"/></linearGradient>
-      <linearGradient id="ch" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A2E1B"/><stop offset="1" stop-color="#3B1D10"/></linearGradient>
-      <radialGradient id="gl"><stop offset="0" stop-color="#FFE9A6" stop-opacity=".75"/><stop offset="1" stop-color="#FFE9A6" stop-opacity="0"/></radialGradient>
-    </defs>
-    <ellipse cx="130" cy="244" rx="122" ry="12" fill="#C9A24B"/><ellipse cx="130" cy="240" rx="118" ry="10" fill="#E8D18A"/>
-    <rect x="28" y="168" width="204" height="70" rx="10" fill="url(#cr)"/><circle cx="97" cy="184" r="2" fill="#fff"/><circle cx="45" cy="220" r="2" fill="#FF6B6B"/><circle cx="105" cy="179" r="2" fill="#FF8FB1"/><circle cx="76" cy="181" r="2" fill="#9B7BFF"/><circle cx="49" cy="181" r="2" fill="#9B7BFF"/><circle cx="47" cy="207" r="2" fill="#FFC83D"/><circle cx="155" cy="207" r="2" fill="#FF6B6B"/><circle cx="144" cy="197" r="2" fill="#FFC83D"/><circle cx="45" cy="222" r="2" fill="#2FC4A0"/><circle cx="115" cy="205" r="2" fill="#FF8FB1"/><circle cx="94" cy="220" r="2" fill="#FFC83D"/><circle cx="55" cy="207" r="2" fill="#FFC83D"/><circle cx="106" cy="206" r="2" fill="#FF6B6B"/><circle cx="142" cy="209" r="2" fill="#9B7BFF"/><circle cx="164" cy="199" r="2" fill="#2FC4A0"/><circle cx="124" cy="226" r="2" fill="#2FC4A0"/><circle cx="92" cy="219" r="2" fill="#fff"/><circle cx="183" cy="180" r="2" fill="#2FC4A0"/><circle cx="135" cy="223" r="2" fill="#fff"/><circle cx="120" cy="209" r="2" fill="#FF6B6B"/><circle cx="58" cy="199" r="2" fill="#2FC4A0"/><circle cx="65" cy="202" r="2" fill="#FF6B6B"/><circle cx="217" cy="180" r="2" fill="#FF8FB1"/><circle cx="144" cy="223" r="2" fill="#2FC4A0"/><circle cx="100" cy="195" r="2" fill="#9B7BFF"/><circle cx="145" cy="201" r="2" fill="#FF6B6B"/>
-    <rect x="54" y="118" width="152" height="58" rx="10" fill="url(#cr)"/><circle cx="190" cy="146" r="2" fill="#fff"/><circle cx="71" cy="157" r="2" fill="#2FC4A0"/><circle cx="150" cy="168" r="2" fill="#9B7BFF"/><circle cx="101" cy="142" r="2" fill="#fff"/><circle cx="109" cy="166" r="2" fill="#2FC4A0"/><circle cx="85" cy="131" r="2" fill="#FF6B6B"/><circle cx="92" cy="138" r="2" fill="#fff"/><circle cx="96" cy="142" r="2" fill="#9B7BFF"/><circle cx="73" cy="145" r="2" fill="#FF8FB1"/><circle cx="100" cy="132" r="2" fill="#9B7BFF"/><circle cx="180" cy="138" r="2" fill="#9B7BFF"/><circle cx="196" cy="155" r="2" fill="#9B7BFF"/><circle cx="192" cy="132" r="2" fill="#FFC83D"/><circle cx="83" cy="154" r="2" fill="#FF6B6B"/><circle cx="128" cy="151" r="2" fill="#2FC4A0"/><circle cx="100" cy="132" r="2" fill="#FF8FB1"/><circle cx="112" cy="150" r="2" fill="#FFC83D"/><circle cx="156" cy="148" r="2" fill="#FF8FB1"/>
-    <rect x="80" y="70" width="100" height="54" rx="10" fill="url(#cr)"/>
-    <path d="M80 80c0-8 6-12 10-12h80c4 0 10 4 10 12v6c-4 10-8 0-12 8s-8 14-12 4-8 10-12 2-8-8-12 6-8-6-12-2-8 6-12-4-10-6-10-18z" fill="url(#ch)"/>
-    <rect x="94" y="46" width="5" height="24" rx="1" fill="#FF8FB1"/><circle cx="96.5" cy="38" r="14" fill="url(#gl)"/><ellipse class="flame" cx="96.5" cy="39" rx="3.6" ry="7.5" fill="#FFB02E"/><rect x="107" y="46" width="5" height="24" rx="1" fill="#FFC83D"/><circle cx="109.5" cy="38" r="14" fill="url(#gl)"/><ellipse class="flame" cx="109.5" cy="39" rx="3.6" ry="7.5" fill="#FFB02E"/><rect x="120" y="46" width="5" height="24" rx="1" fill="#9B7BFF"/><circle cx="122.5" cy="38" r="14" fill="url(#gl)"/><ellipse class="flame" cx="122.5" cy="39" rx="3.6" ry="7.5" fill="#FFB02E"/><rect x="133" y="46" width="5" height="24" rx="1" fill="#2FC4A0"/><circle cx="135.5" cy="38" r="14" fill="url(#gl)"/><ellipse class="flame" cx="135.5" cy="39" rx="3.6" ry="7.5" fill="#FFB02E"/><rect x="146" y="46" width="5" height="24" rx="1" fill="#FF8FB1"/><circle cx="148.5" cy="38" r="14" fill="url(#gl)"/><ellipse class="flame" cx="148.5" cy="39" rx="3.6" ry="7.5" fill="#FFB02E"/><rect x="159" y="46" width="5" height="24" rx="1" fill="#FFC83D"/><circle cx="161.5" cy="38" r="14" fill="url(#gl)"/><ellipse class="flame" cx="161.5" cy="39" rx="3.6" ry="7.5" fill="#FFB02E"/><rect x="172" y="46" width="5" height="24" rx="1" fill="#9B7BFF"/><circle cx="174.5" cy="38" r="14" fill="url(#gl)"/><ellipse class="flame" cx="174.5" cy="39" rx="3.6" ry="7.5" fill="#FFB02E"/>
-  </svg>
-  <button class="btn" id="blow">Blow the candles</button>
+  <svg class="cake" viewBox="0 0 260 200" role="img" aria-label="Candles"><defs><linearGradient id="gd" x1="0" x2="1"><stop offset="0" stop-color="#B8903A"/><stop offset=".5" stop-color="#F0DFA8"/><stop offset="1" stop-color="#B8903A"/></linearGradient><radialGradient id="gl"><stop offset="0" stop-color="#FFE9A6" stop-opacity=".45"/><stop offset="1" stop-color="#FFE9A6" stop-opacity="0"/></radialGradient></defs><rect x="36" y="170" width="188" height="7" rx="3.5" fill="url(#gd)"/><rect x="52" y="179" width="156" height="4" rx="2" fill="#8A6D2F" opacity=".55"/><rect x="66" y="96" width="8" height="74" rx="2" fill="url(#gd)"/><circle cx="70" cy="82" r="11" fill="url(#gl)"/><ellipse class="flame" cx="70" cy="84" rx="3.4" ry="8" fill="#FFD27A"/><rect x="96" y="84" width="8" height="86" rx="2" fill="url(#gd)"/><circle cx="100" cy="70" r="11" fill="url(#gl)"/><ellipse class="flame" cx="100" cy="72" rx="3.4" ry="8" fill="#FFD27A"/><rect x="126" y="72" width="8" height="98" rx="2" fill="url(#gd)"/><circle cx="130" cy="58" r="11" fill="url(#gl)"/><ellipse class="flame" cx="130" cy="60" rx="3.4" ry="8" fill="#FFD27A"/><rect x="156" y="84" width="8" height="86" rx="2" fill="url(#gd)"/><circle cx="160" cy="70" r="11" fill="url(#gl)"/><ellipse class="flame" cx="160" cy="72" rx="3.4" ry="8" fill="#FFD27A"/><rect x="186" y="96" width="8" height="74" rx="2" fill="url(#gd)"/><circle cx="190" cy="82" r="11" fill="url(#gl)"/><ellipse class="flame" cx="190" cy="84" rx="3.4" ry="8" fill="#FFD27A"/></svg>
+  <button class="btn gold" id="blow">Blow the candles</button>
   <p id="wishmsg" aria-live="polite"></p>
 </section>
 
@@ -252,11 +266,11 @@ const PROJECTS=[
 const SITE={t:"Skill Filled Academia",d:"You taught me, I built it anyway.",url:"https://skill-filled-academia.skillfilled.workers.dev/"};
 
 const LETTERS=[
- {t:"Open for a laugh",c:"var(--sun)",b:"Breaking news from the hostel: the chai has more water than milk. Scientists are still searching for the tea. And yet you drink it every single day without complaint. That is not a habit, Sir, that is discipline. Please judge my bugs with the same patience you show that chai."},
- {t:"Open when you miss home",c:"var(--pink)",b:"Six months is a long time to be away from home, and I know it is on your mind. A hostel room and watery chai cannot replace family. But you have a whole group of students who think of you as family. Wherever home is, it is lucky to have you."},
- {t:"Open when you doubt your impact",c:"var(--mint)",b:"Count with me: Shikari, a marketing agent, an admissions agent, a recruitment system, a carousel studio, and one website nobody assigned. Six things that did not exist before your classes. You told me once, \"Sky is the limit.\" Sir, I am only starting to look up."},
- {t:"Open for the team page",c:"#8EC5FF",b:"You put my name on your team, next to people I look up to. I read that page twice, then a third time. You said you plan to train me and make me grow more. It is working, Sir. Thank you for trusting a student with that."},
- {t:"Open for the successor story",c:"#FF9F5A",b:"You called me your successor, and then you left the chair yourself. Sir, that is a captain naming a vice-captain and walking off the field mid-match. Do not worry, I am keeping your seat warm. The chai is on you."},
+ {t:"Open for a smile",c:"var(--sun)",b:"Sir, I checked every project on this page before sending it to you. If you still find a bug, please grade it with the same patience you showed me in class. I am still learning, and that is your fault, in the best way."},
+ {t:"Open when you miss home",c:"var(--pink)",b:"Being away from home is never easy, and I will not pretend to know how it feels. But I do know there is a whole group of students who think of you as family. Wherever home is, it is lucky to have you, and wherever you are today, you are not alone."},
+ {t:"Open when you doubt your impact",c:"var(--mint)",b:"Count with me: Shikari, a marketing agent, an admissions agent, a recruitment system, a carousel studio, and one website nobody assigned. Six things that did not exist before your classes. Sir, that is your impact, and it has a name on every one of them."},
+ {t:"Open for the team page",c:"#7C9CC0",b:"You put my name on your team, next to people I look up to. I read that page twice, then a third time. You said you plan to train me and make me grow more. It is working, Sir. Thank you for trusting a student with that."},
+ {t:"Open when you feel tired",c:"#C98B4E",b:"Teaching is slow work, and the results usually show up long after the lesson. This page is one result. Whenever the days feel heavy, remember that someone is building things today because of what you taught."},
  {t:"Open last",c:"var(--coral)",b:"Thank you for the patience, the time and the push. I am sorry this wish is late, but I wanted it to be worth the wait. Happy belated birthday, Sir."}
 ];
 
@@ -274,10 +288,7 @@ document.getElementById('shut').onclick=shut;
 door.onclick=e=>{if(e.target===door)shut()};
 addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
 
-// Bunting flags
-const cols=['#FF6B6B','#FFC83D','#2FC4A0','#9B7BFF','#FF8FB1','#1E4ED8'];
-const bun=document.getElementById('bunting');
-for(let i=0;i<40;i++){const f=document.createElement('i');f.style.background=cols[i%cols.length];bun.appendChild(f)}
+const cols=['#C9A24B','#E8D9A8','#F3EBDD','#8A6D2F']; // gold and cream confetti
 
 // Confetti
 const cv=document.getElementById('fx'),cx=cv.getContext('2d');
@@ -357,6 +368,26 @@ inside.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true}
 inside.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)go(cur+(d<0?1:-1))});
 addEventListener('keydown',e=>{if(!door.classList.contains('on'))return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
 document.getElementById('openLetters').onclick=()=>{cur=0;openDoor(deckHTML(),'Come in, Sir. These are for you.')};
+
+// Gold sparkles drifting in the background, and scroll reveals
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const sk=document.createElement('canvas');sk.id='sparks';document.body.prepend(sk);
+  const sc=sk.getContext('2d');let dots=[];
+  const fitS=()=>{sk.width=innerWidth;sk.height=innerHeight};fitS();addEventListener('resize',fitS);
+  for(let i=0;i<55;i++)dots.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.8+.4,v:Math.random()*.25+.08,t:Math.random()*6});
+  (function loop(){
+    sc.clearRect(0,0,sk.width,sk.height);
+    dots.forEach(d=>{d.y-=d.v;d.t+=.03;if(d.y<-5){d.y=sk.height+5;d.x=Math.random()*sk.width}
+      sc.globalAlpha=.25+.45*Math.abs(Math.sin(d.t));sc.fillStyle='#E8D9A8';sc.beginPath();sc.arc(d.x,d.y,d.r,0,6.3);sc.fill()});
+    requestAnimationFrame(loop)})();
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+      e.target.classList.add('in');io.unobserve(e.target);
+      setTimeout(()=>e.target.classList.remove('rv','in'),1000)}}),{threshold:.12});
+    document.querySelectorAll('section h2,section .lead,.card,.tcard,.quote,.btn.gold').forEach((el,i)=>{
+      el.classList.add('rv');el.style.transitionDelay=(i%3)*90+'ms';io.observe(el)});
+  }
+}
 </script>
 </body>
 </html>
