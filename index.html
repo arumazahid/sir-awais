@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Belated Happy Birthday, Sir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F7FA; --panel:#fff; --ink:#13203A; --muted:#5B6779;
+  --line:#DDE3EC; --blue:#1E4ED8; --sky:#E6EEFB;
+  --serif:'Newsreader',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+  --mono:ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans)}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:72px 0 56px}
+.hero p.hi{color:var(--muted);margin-bottom:12px}
+h1{font:600 clamp(2.4rem,5.4vw,4rem)/1.08 var(--serif);letter-spacing:-.01em}
+.sub{color:var(--muted);margin:18px 0 28px;max-width:46ch}
+.term{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;font:15px/1.7 var(--mono);min-height:210px}
+.term .p{color:var(--blue)}
+.term .v{color:var(--ink);font-weight:700}
+.caret{display:inline-block;width:8px;height:1em;background:var(--blue);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.photo{aspect-ratio:4/5;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--sky)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:0 55%;display:block}
+
+/* sections */
+section{padding:56px 0}
+h2{font:600 clamp(1.7rem,3.4vw,2.4rem)/1.15 var(--serif);margin-bottom:8px}
+.lead{color:var(--muted);margin-bottom:32px;max-width:56ch}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{display:block;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;font:inherit;color:inherit;text-decoration:none;padding:0}
+.card img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block;border-bottom:1px solid var(--line)}
+.card .t{padding:14px 16px 16px}
+.card b{display:block;font-weight:700}
+.card span{color:var(--muted);font-size:.93rem}
+.card.site{display:flex;flex-direction:column;justify-content:center;background:var(--sky);padding:20px}
+.card:hover{border-color:var(--blue)}
+
+/* letters */
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.tab{font:500 .95rem var(--sans);padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.tab[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.letter{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:32px clamp(20px,4vw,44px);min-height:200px}
+.letter h3{font:600 1.4rem var(--serif);margin-bottom:12px}
+.letter p{font:1.2rem/1.75 var(--serif);max-width:60ch}
+.letter .by{margin-top:18px;font-style:italic;color:var(--muted)}
+.letter.in{animation:open .45s ease}
+@keyframes open{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.empty{color:var(--muted)}
+
+/* lightbox */
+dialog{border:0;border-radius:12px;padding:0;max-width:min(1100px,94vw);background:var(--panel)}
+dialog::backdrop{background:rgba(19,32,58,.6)}
+dialog img{display:block;width:100%;height:auto;max-height:86vh;object-fit:contain}
+dialog button{position:absolute;top:10px;right:10px;border:0;border-radius:8px;padding:8px 14px;background:var(--ink);color:#fff;font:inherit;cursor:pointer}
+footer{padding:40px 0 64px;color:var(--muted);border-top:1px solid var(--line);margin-top:24px}
+
+@media(max-width:820px){
+  .hero{grid-template-columns:1fr;gap:32px;padding-top:40px}
+  .photo{max-width:360px}
+  .grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:540px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+<header class="hero">
+  <div>
+    <p class="hi">Belated Happy Birthday, Sir</p>
+    <h1>Everything on this page started with you.</h1>
+    <p class="sub">Six projects, built with what you taught me. I wanted you to see where your lessons went.</p>
+    <div class="term" id="term" aria-label="Terminal"></div>
+  </div>
+  <div class="photo"><img src="assets/sir.png" alt="Sir at his desk"></div>
+</header>
+
+<section id="work">
+  <h2>What your lessons became</h2>
+  <p class="lead">Tap any project to see it up close.</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="letters">
+  <h2>Open when...</h2>
+  <p class="lead">A few letters for you. Open them in any order, and the last one at the end.</p>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="letter" id="letter" aria-live="polite"><p class="empty">Pick a letter above.</p></div>
+</section>
+
+</main>
+<footer><div class="wrap">Made with code, by Aruma.</div></footer>
+
+<dialog id="box"><button id="x" aria-label="Close">Close</button><img id="big" alt=""></dialog>
+
+<script>
+// Edit the content here
+const PROJECTS=[
+  {t:"Shikari",d:"Finds winning products and works out the profit.",img:"assets/shikari.png"},
+  {t:"AI Marketing Agent",d:"Writes, schedules and publishes posts.",img:"assets/marketing.png"},
+  {t:"Leaders Academia Agent",d:"A WhatsApp admissions agent with a live dashboard.",img:"assets/leaders.png"},
+  {t:"HR Recruitment System",d:"Ranks CVs against the job in seconds.",img:"assets/hr.png"},
+  {t:"Carousel Posting Agent",d:"Creates and posts Instagram carousels.",img:"assets/carousel.png"}
+];
+const SITE={t:"Skill Filled Academia",d:"You taught me, I built it anyway.",url:"https://skill-filled-academia.skillfilled.workers.dev/"};
+
+const LETTERS=[
+ {t:"Open when you need a smile",b:"Right now an agent I built is posting content while I sleep. You taught me that. If this does not make you smile, I will build another one."},
+ {t:"Open when you doubt your impact",b:"Every project on this page exists because you showed me where to start. None of them were assigned. I built them because you made me believe I could."},
+ {t:"Open on a tough day",b:"Teachers rarely see what happens after the lesson ends. I wanted you to see it. Your lessons are still running, in my code, every single day."},
+ {t:"Open when you see my work",b:"Scroll up and look at the projects again. Each one began with something you explained to me patiently. This is what your time turned into."},
+ {t:"Open last",b:"Thank you for the patience, the time and the push. I am sorry this is late, but I wanted it to be worth the wait. Happy belated birthday, Sir."}
+];
+
+// Terminal typing, plays once
+const lines=[["who_taught_me",'"Sir"'],["projects_built","6"],["status",'"still learning, still building"'],["wish",'"Happy belated birthday, Sir."']];
+const term=document.getElementById('term');
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function row(c,v){return `<div><span class="p">&gt;</span> ${c}<br><span class="v">${v}</span></div>`}
+if(still){term.innerHTML=lines.map(l=>row(...l)).join('')}
+else{
+  let html='',i=0;
+  const next=()=>{
+    if(i>=lines.length){term.innerHTML=html;return}
+    const [c,v]=lines[i];let n=0;
+    const tick=()=>{
+      n++;term.innerHTML=html+`<div><span class="p">&gt;</span> ${c.slice(0,n)}<span class="caret"></span></div>`;
+      if(n<c.length)setTimeout(tick,55);
+      else setTimeout(()=>{html+=row(c,v);i++;term.innerHTML=html;setTimeout(next,350)},250);
+    };
+    tick();
+  };
+  setTimeout(next,500);
+}
+
+// Project cards and lightbox
+const grid=document.getElementById('grid'),box=document.getElementById('box'),big=document.getElementById('big');
+PROJECTS.forEach(p=>{
+  const b=document.createElement('button');b.className='card';
+  b.innerHTML=`<img src="${p.img}" alt="${p.t} screenshot"><div class="t"><b>${p.t}</b><span>${p.d}</span></div>`;
+  b.onclick=()=>{big.src=p.img;big.alt=p.t;box.showModal()};
+  grid.appendChild(b);
+});
+grid.insertAdjacentHTML('beforeend',`<a class="card site" href="${SITE.url}" target="_blank" rel="noopener"><b>${SITE.t}</b><span>${SITE.d}</span><span>Open the site</span></a>`);
+document.getElementById('x').onclick=()=>box.close();
+box.onclick=e=>{if(e.target===box)box.close()};
+
+// Letters
+const tabs=document.getElementById('tabs'),letter=document.getElementById('letter');
+LETTERS.forEach((l,i)=>{
+  const t=document.createElement('button');t.className='tab';t.role='tab';t.textContent=l.t;t.setAttribute('aria-selected','false');
+  t.onclick=()=>{
+    tabs.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));
+    t.setAttribute('aria-selected','true');
+    letter.className='letter';void letter.offsetWidth;letter.className='letter in';
+    letter.innerHTML=`<h3>${l.t}</h3><p>${l.b}</p>`+(i===LETTERS.length-1?'<p class="by">With respect, Aruma</p>':'');
+  };
+  tabs.appendChild(t);
+});
+</script>
+</body>
+</html>
