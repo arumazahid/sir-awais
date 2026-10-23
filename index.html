@@ -378,6 +378,31 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
   .gt-lock{width:78px;height:78px;margin:-39px 0 0 -39px}.gt-lock svg{width:30px;height:30px}
 }
 @media(prefers-reduced-motion:reduce){.gt-lock{animation:none!important}}
+
+/* ===== black candle stage ===== */
+.wish.dark{background-color:#000}
+.wish::before{background:
+  radial-gradient(ellipse 50% 45% at 50% 68%,rgba(255,170,90,.26),transparent 70%),
+  linear-gradient(180deg,rgba(0,0,0,.92),rgba(6,4,14,.90)),
+  url(party.webp) center/cover}
+.wish.out::before{filter:blur(6px) saturate(.8) brightness(.7)}
+
+/* ===== letters: midnight with floating sealed envelopes ===== */
+#letters.dark{background-color:#05070F;backdrop-filter:none;color:#F6EEDD;border-block:1px solid #2A2540;text-align:center;
+  background-image:radial-gradient(ellipse 60% 75% at 50% 45%,rgba(124,92,210,.24),transparent 72%),radial-gradient(ellipse 40% 50% at 15% 90%,rgba(201,162,75,.14),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22280%22 fill=%22none%22 stroke=%22%23C9A24B%22 stroke-opacity=%22.16%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cg transform=%22translate%2820 20%29 scale%281.5%29%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%223%22/%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%227%22/%3E%3Cpath d=%22M12 2v3M12 19v3M2 12h3M19 12h3%22/%3E%3C/g%3E%3Cg transform=%22translate%28150 40%29 scale%281.5%29%22%3E%3Cpath d=%22M8 7l-5 5 5 5M16 7l5 5-5 5M14 5l-4 14%22/%3E%3C/g%3E%3Cg transform=%22translate%2880 130%29 scale%281.5%29%22%3E%3Cpath d=%22M4 5h16v11H9l-5 4z%22/%3E%3C/g%3E%3Cg transform=%22translate%28200 150%29 scale%281.5%29%22%3E%3Ccircle cx=%225%22 cy=%226%22 r=%222%22/%3E%3Ccircle cx=%2219%22 cy=%226%22 r=%222%22/%3E%3Ccircle cx=%2212%22 cy=%2218%22 r=%222%22/%3E%3Cpath d=%22M7 6h10M6 8l5 8M18 8l-5 8%22/%3E%3C/g%3E%3Cg transform=%22translate%2830 210%29 scale%281.5%29%22%3E%3Cpath d=%22M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5%22/%3E%3C/g%3E%3Cg transform=%22translate%28140 230%29 scale%281.5%29%22%3E%3Cpath d=%22M9 18h6M10 21h4M12 3a6 6 0 00-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 00-4-10z%22/%3E%3C/g%3E%3C/svg%3E")}
+#letters.dark h2{color:#FBF1D6;text-shadow:0 0 28px rgba(240,200,120,.3)}
+#letters.dark .lead{color:#C9C3DC;margin-inline:auto}
+.mini-row{display:flex;flex-wrap:wrap;justify-content:center;gap:26px 22px;margin:8px auto 40px;max-width:540px}
+.mini{width:150px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:#F6EEDD;animation:mfloat 5s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-.8s)}
+@keyframes mfloat{to{transform:translateY(-10px) rotate(1.5deg)}}
+.mini .ev{position:relative;display:block;height:100px;border-radius:6px;background:linear-gradient(160deg,#FFF6E0,#EAD9AE);
+  box-shadow:0 14px 28px rgba(0,0,0,.55),0 0 0 1px rgba(232,217,168,.6);overflow:hidden;transition:transform .3s,box-shadow .3s}
+.mini .ev::before{content:"";position:absolute;left:0;right:0;top:0;height:58%;background:var(--c);opacity:.9;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .45s}
+.mini .ev::after{content:"";position:absolute;left:50%;top:44%;width:24px;height:24px;margin:-12px 0 0 -12px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3c8,#C9A24B);box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.mini:hover .ev,.mini:focus-visible .ev{transform:translateY(-4px);box-shadow:0 18px 34px rgba(0,0,0,.6),0 0 24px rgba(240,200,120,.45),0 0 0 1px #E8D9A8}
+.mini:hover .ev::before{transform:scaleY(.25)}
+.mini b{display:block;margin-top:12px;font:500 .95rem/1.3 var(--serif);color:#E8D9A8}
+@media(max-width:560px){.mini{width:calc(50% - 14px)}.mini-row{gap:22px 16px}}
 </style>
 </head>
 <body>
@@ -438,9 +463,9 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
 
 <section class="dark" id="letters">
   <h2>Open when...</h2>
-  <p class="lead">Six letters, one door. Swipe through them, Sir Awais.</p>
+  <p class="lead">Six sealed letters, one for every moment. Pick one, Sir Awais.</p>
+  <div class="mini-row" id="miniRow"></div>
   <button class="btn gold" id="openLetters">Open the letters</button>
-  
 </section>
 
 <section id="reply" style="text-align:center"><h2>Say hello back</h2><p class="lead" style="margin-inline:auto">If this made you smile, Sir Awais, I would love to hear it.</p>
@@ -559,6 +584,9 @@ inside.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true}
 inside.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)go(cur+(d<0?1:-1))});
 addEventListener('keydown',e=>{if(!door.classList.contains('on'))return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1)});
 document.getElementById('openLetters').onclick=()=>{cur=0;openDoor(deckHTML(),'Come in, Sir Awais. These are for you.')};
+document.getElementById('miniRow').innerHTML=LETTERS.map((l,i)=>`<button class="mini" style="--c:${l.c};--i:${i}" data-i="${i}" aria-label="${l.t}"><span class="ev"></span><b>${l.t}</b></button>`).join('');
+document.getElementById('miniRow').onclick=e=>{const m=e.target.closest('.mini');if(!m)return;const i=+m.dataset.i;cur=0;openDoor(deckHTML(),'Come in, Sir Awais. This one is for you.');
+  setTimeout(()=>{go(i);const en=inside.querySelectorAll('.env')[i];if(en)en.classList.add('gone')},120)};
 
 // Gold sparkles drifting in the background, and scroll reveals
 if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
