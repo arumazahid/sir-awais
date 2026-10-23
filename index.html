@@ -313,6 +313,71 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
 .cover span{display:block;margin-top:14px;letter-spacing:.25em;text-transform:uppercase;font-size:.8rem}
 .cover em{display:block;margin-top:26px;font:italic .95rem var(--serif);opacity:.7}
 @media(max-width:820px){.spread{grid-template-columns:1fr}.pg.left{border-radius:8px 8px 0 0}.pg.right{border-radius:0 0 16px 16px}.leaf{left:0;width:100%}}
+
+/* ===== candle night: deep indigo + plum with warm candle glow ===== */
+.wish.dark{background-color:#141A3A;backdrop-filter:none;color:#F6EEDD;border-block:1px solid #3A3466}
+.wish::before{background:
+  radial-gradient(ellipse 55% 50% at 50% 66%,rgba(255,176,96,.38),transparent 68%),
+  linear-gradient(180deg,rgba(16,22,52,.80) 0%,rgba(44,30,78,.74) 55%,rgba(74,44,88,.66) 100%),
+  url(party.webp) center/cover;
+  filter:blur(6px) saturate(1.1);opacity:1;transform:scale(1.08);transition:filter 1.2s}
+.wish::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22280%22 fill=%22none%22 stroke=%22%23C9A24B%22 stroke-opacity=%22.16%22 stroke-width=%221.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cg transform=%22translate%2820 20%29 scale%281.5%29%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%223%22/%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%227%22/%3E%3Cpath d=%22M12 2v3M12 19v3M2 12h3M19 12h3%22/%3E%3C/g%3E%3Cg transform=%22translate%28150 40%29 scale%281.5%29%22%3E%3Cpath d=%22M8 7l-5 5 5 5M16 7l5 5-5 5M14 5l-4 14%22/%3E%3C/g%3E%3Cg transform=%22translate%2880 130%29 scale%281.5%29%22%3E%3Cpath d=%22M4 5h16v11H9l-5 4z%22/%3E%3C/g%3E%3Cg transform=%22translate%28200 150%29 scale%281.5%29%22%3E%3Ccircle cx=%225%22 cy=%226%22 r=%222%22/%3E%3Ccircle cx=%2219%22 cy=%226%22 r=%222%22/%3E%3Ccircle cx=%2212%22 cy=%2218%22 r=%222%22/%3E%3Cpath d=%22M7 6h10M6 8l5 8M18 8l-5 8%22/%3E%3C/g%3E%3Cg transform=%22translate%2830 210%29 scale%281.5%29%22%3E%3Cpath d=%22M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5%22/%3E%3C/g%3E%3Cg transform=%22translate%28140 230%29 scale%281.5%29%22%3E%3Cpath d=%22M9 18h6M10 21h4M12 3a6 6 0 00-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 00-4-10z%22/%3E%3C/g%3E%3C/svg%3E")}
+.wish.out::before{filter:blur(6px) saturate(.9) brightness(.78)}
+.wish.dark h2{color:#FBF1D6;text-shadow:0 0 30px rgba(240,200,120,.35)}
+.wish.dark .lead{color:#D9D0EA}
+.wish.dark #wishmsg{color:#F0DFA8}
+.wish .cake{filter:drop-shadow(0 0 44px rgba(255,186,96,.6))}
+.wish.out .cake{filter:none}
+.wish .btn:not(.gold){background:transparent;color:#F6EEDD;border:1px solid rgba(240,223,168,.55)}
+
+/* ===== the gate ===== */
+.gt{position:relative;perspective:1600px;border-radius:22px;overflow:hidden;background:#0E1430;margin-top:8px;
+  box-shadow:0 30px 70px rgba(30,42,68,.35),0 0 0 3px #C9A24B,0 0 0 9px #1E2A44}
+.gt-room{position:relative;padding:36px clamp(16px,3vw,36px);visibility:hidden;
+  background:radial-gradient(ellipse at 50% 0%,#34417C,#141A3A 72%)}
+.gt.open .gt-room{visibility:visible}
+.gt-light{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 2.4s .3s;
+  background:radial-gradient(circle at 50% 50%,rgba(255,226,150,.55),transparent 62%)}
+.gt.open .gt-light{opacity:.3}
+.gt-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gc{display:flex;flex-direction:column;text-align:left;font:inherit;color:#F6EEDD;text-decoration:none;cursor:pointer;padding:0;
+  background:#182046;border:1px solid rgba(201,162,75,.55);border-radius:14px;overflow:hidden;
+  opacity:0;transform:translateY(46px) scale(.86);
+  transition:opacity .7s,transform .9s cubic-bezier(.2,.9,.3,1.15),box-shadow .3s,border-color .3s;
+  transition-delay:calc(1s + var(--i)*.17s)}
+.gt.open .gc{opacity:1;transform:none}
+.gt.done .gc{transition-delay:0s}
+.gt.done .gc:hover{transform:translateY(-5px);border-color:#E8D9A8;box-shadow:0 16px 36px rgba(201,162,75,.35)}
+.gc img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-bottom:1px solid rgba(201,162,75,.4)}
+.gc-t{display:block;padding:14px 16px 16px}
+.gc-t b{display:block;font:600 1.2rem var(--serif);color:#fff}
+.gc-t small{display:block;margin-top:4px;font-size:.88rem;line-height:1.45;color:#B9C0DA}
+.gc.site{justify-content:center;background:linear-gradient(135deg,#E8D9A8,#C9A24B);border-color:#F6EEDD;color:#1E2A44;min-height:200px}
+.gc.site .gc-t b{color:#1E2A44;font-size:1.4rem}
+.gc.site .gc-t small{color:#3B3320}
+.gc.site em{display:block;margin-top:12px;font:600 1.4rem Caveat,cursive;font-style:normal;color:#1E2A44}
+.gt-door{position:absolute;top:0;bottom:0;width:50%;z-index:4;display:flex;align-items:center;
+  background:repeating-linear-gradient(90deg,transparent 0 22px,rgba(201,162,75,.22) 22px 25px),linear-gradient(180deg,#2B3366,#161C40);
+  box-shadow:inset 0 0 0 4px #C9A24B,inset 0 0 0 12px #161C40,inset 0 0 0 14px rgba(201,162,75,.5);
+  transition:transform 1.7s cubic-bezier(.6,0,.2,1)}
+.gt-door.l{left:0;transform-origin:left center;justify-content:flex-end}
+.gt-door.r{right:0;transform-origin:right center;justify-content:flex-start}
+.gt-door span{font:600 clamp(1.1rem,3.2vw,2.3rem)/1.1 var(--serif);color:#F0DFA8;padding:0 clamp(52px,7vw,92px);text-shadow:0 2px 12px #0C1030,0 0 24px rgba(201,162,75,.45)}
+.gt.open .gt-door.l{transform:rotateY(-88deg)}
+.gt.open .gt-door.r{transform:rotateY(88deg)}
+.gt-lock{position:absolute;left:50%;top:50%;z-index:5;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;
+  border:3px solid #E8D9A8;background:radial-gradient(circle at 35% 30%,#F6E7B4,#B8893A);color:#1E2A44;display:grid;place-items:center;
+  cursor:pointer;padding:0;animation:gtPulse 2.2s ease-in-out infinite;transition:transform .7s,opacity .7s}
+.gt-lock svg{width:38px;height:38px}
+.gt-lock em{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);white-space:nowrap;font:600 1.4rem Caveat,cursive;font-style:normal;color:#F0DFA8;text-shadow:0 2px 8px #0C1030}
+@keyframes gtPulse{0%,100%{box-shadow:0 0 0 0 rgba(240,223,168,.55)}50%{box-shadow:0 0 0 18px rgba(240,223,168,0)}}
+.gt.open .gt-lock{transform:scale(1.7);opacity:0;pointer-events:none}
+@media(max-width:700px){
+  .gt-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .gc-t{padding:10px 12px 12px}.gc-t b{font-size:1rem}.gc-t small{font-size:.78rem}
+  .gt-lock{width:78px;height:78px;margin:-39px 0 0 -39px}.gt-lock svg{width:30px;height:30px}
+}
+@media(prefers-reduced-motion:reduce){.gt-lock{animation:none!important}}
 </style>
 </head>
 <body>
@@ -344,16 +409,18 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
   <p id="wishmsg" aria-live="polite"></p>
 </section>
 
-<section id="show"><h2>What your lessons became</h2><p class="lead">A little book, with one chapter for every project.</p>
-  <div class="book" id="stage">
-    <div class="cover" id="cover"><small>Welcome</small><b>Sir Awais</b><span>What your lessons became</span><em>opening the book...</em></div>
-    <div class="spread">
-      <div class="pg left cap"><small id="sNum"></small><h3 id="sT"></h3><p id="sD"></p><div class="sd" id="sDots"></div><div class="th" id="th"></div></div>
-      <div class="pg right"><div class="scr"><img id="sImg" alt=""></div></div>
-      <div class="leaf" id="leaf"></div>
-    </div>
+<section id="show"><h2>What your lessons became</h2><p class="lead">Everything you taught me is behind this gate. Tap the lock to open it.</p>
+  <div class="gt" id="gate">
+    <div class="gt-room"><div class="gt-light"></div><div class="gt-grid" id="gtGrid"></div></div>
+    <div class="gt-door l"><span>Everything</span></div>
+    <div class="gt-door r"><span>you taught me</span></div>
+    <button class="gt-lock" id="gtLock" aria-label="Open the gate">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+      <em>tap to open</em>
+    </button>
   </div>
-  <p style="text-align:center;margin-top:24px"><a class="btn gold" id="siteLink" href="#" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Visit Skill Filled Academia</a></p></section>
+</section>
+<dialog id="lb"><img id="lbImg" alt=""><button id="lbX">Close</button></dialog>
 
 <section id="path"><h2>The road so far</h2><p class="lead">From a student in your class to a builder.</p><div class="tl" id="tl"><i class="fill"></i></div></section>
 
@@ -558,29 +625,18 @@ function tune(){
 document.getElementById('mus').onclick=e=>{muted=!muted;e.target.textContent=muted?'Sound: off':'Sound: on'};
 // Project showcase and journey
 (function(){
-  const img=document.getElementById('sImg'),num=document.getElementById('sNum'),T=document.getElementById('sT'),D=document.getElementById('sD'),dots=document.getElementById('sDots');
-  let k=0,tm;
-  const th=document.getElementById('th');
-  th.innerHTML=PROJECTS.map((p,i)=>`<img src="${p.img}" alt="${p.t}" loading="lazy" data-i="${i}">`).join('');
-  th.onclick=e=>{const m=e.target.closest('img');if(m){show(+m.dataset.i);play()}};
-  document.getElementById('siteLink').href=SITE.url;
-  dots.innerHTML=PROJECTS.map((_,i)=>`<i data-i="${i}"></i>`).join('');
-  function setPage(i){k=i;const p=PROJECTS[i];img.src=p.img;img.alt=p.t;num.textContent='chapter '+(i+1)+' of '+PROJECTS.length;T.textContent=p.t;D.textContent=p.d;
-    dots.querySelectorAll('i').forEach((d,j)=>d.classList.toggle('on',j===i));th.querySelectorAll('img').forEach((d,j)=>d.classList.toggle('on',j===i))}
+  const g=document.getElementById('gate'),grid=document.getElementById('gtGrid'),lock=document.getElementById('gtLock');
+  const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg');
+  grid.innerHTML=PROJECTS.map((p,i)=>`<button class="gc" style="--i:${i}" data-i="${i}"><img src="${p.img}" alt="${p.t}" loading="lazy"><span class="gc-t"><b>${p.t}</b><small>${p.d}</small></span></button>`).join('')+
+    `<a class="gc site" style="--i:${PROJECTS.length}" href="${SITE.url}" target="_blank" rel="noopener"><span class="gc-t"><b>${SITE.t}</b><small>${SITE.d}</small><em>Visit the website</em></span></a>`;
+  grid.onclick=e=>{const b=e.target.closest('button.gc');if(!b)return;const p=PROJECTS[+b.dataset.i];lbImg.src=p.img;lbImg.alt=p.t;lb.showModal()};
+  document.getElementById('lbX').onclick=()=>lb.close();
+  lb.onclick=e=>{if(e.target===lb)lb.close()};
   let opened=false;
-  const leaf=document.getElementById('leaf'),cover=document.getElementById('cover'),st=document.getElementById('stage');
-  function show(i){
-    if(!opened)return;
-    leaf.classList.remove('turn');void leaf.offsetWidth;leaf.classList.add('turn');
-    setTimeout(()=>setPage(i),450);
-  }
-  const play=()=>{clearInterval(tm);if(opened)tm=setInterval(()=>show((k+1)%PROJECTS.length),4500)};
-  dots.onclick=e=>{const d=e.target.closest('i');if(d){show(+d.dataset.i);play()}};
-  st.onmouseenter=()=>clearInterval(tm);st.onmouseleave=play;
-  function openBook(){if(opened)return;opened=true;cover.classList.add('open');setTimeout(play,1200)}
-  cover.onclick=openBook;
-  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();setTimeout(openBook,1800)}},{threshold:.25}).observe(st);
-  setPage(0);
+  function openGate(){if(opened)return;opened=true;g.classList.add('open');burst();flash();setTimeout(()=>g.classList.add('done'),3600)}
+  lock.onclick=openGate;
+  g.onclick=e=>{if(e.target.closest('.gt-door'))openGate()};
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();setTimeout(openGate,4500)}},{threshold:.6}).observe(g);
   const steps=[["A student in your class","It started the day I became your student and began learning from you."],
    ["Your lessons stuck","Every idea I had traced back to something you taught."],
    ["Five agents and a website","Shikari, marketing, admissions, recruitment, carousels, and Skill Filled Academia."],
@@ -603,7 +659,7 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(()=>{
   document.body.appendChild(e);setTimeout(()=>e.remove(),10000)},1800);
 
 // WhatsApp reply: put Aruma's number here, country code first, digits only (for example 923001234567)
-const WA_NUMBER="92XXXXXXXXXX";
+const WA_NUMBER="923422864114";
 (function(){const a=document.getElementById('wa');
   if(/X/.test(WA_NUMBER)){document.getElementById('reply').style.display='none';return}
   a.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent('Hello Aruma, I saw your birthday page. Thank you!')})();
