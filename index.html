@@ -287,6 +287,10 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
 .ic b{font-size:clamp(2.6rem,9vw,5.5rem)}
 .say{white-space:normal;text-align:center;width:max-content;max-width:86vw}
 .term{min-height:330px}
+
+.th{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.th img{width:64px;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:6px;border:2px solid transparent;opacity:.5;cursor:pointer;transition:.3s}
+.th img.on{opacity:1;border-color:#C9A24B}
 </style>
 </head>
 <body>
@@ -318,14 +322,9 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
   <p id="wishmsg" aria-live="polite"></p>
 </section>
 
-<section id="work">
-  <h2>What your lessons became</h2>
-  <p class="lead">Tap any project to see it up close.</p>
-  <div class="grid" id="grid"></div>
-</section>
-
-<section id="show"><h2>Watch them work</h2><p class="lead">Each project, one by one.</p>
-  <div class="stage" id="stage"><div class="scr"><img id="sImg" alt=""></div><div class="cap"><small id="sNum"></small><h3 id="sT"></h3><p id="sD"></p><div class="sd" id="sDots"></div></div></div></section>
+<section id="show"><h2>What your lessons became</h2><p class="lead">Each project, one by one.</p>
+  <div class="stage" id="stage"><div class="scr"><img id="sImg" alt=""></div><div class="cap"><small id="sNum"></small><h3 id="sT"></h3><p id="sD"></p><div class="sd" id="sDots"></div><div class="th" id="th"></div></div></div>
+  <p style="text-align:center;margin-top:24px"><a class="btn gold" id="siteLink" href="#" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Visit Skill Filled Academia</a></p></section>
 
 <section id="path"><h2>The road so far</h2><p class="lead">From a student in your class to a builder.</p><div class="tl" id="tl"><i class="fill"></i></div></section>
 
@@ -443,15 +442,6 @@ else{
   window.startTerm=()=>setTimeout(next,300);
 }
 
-// Project cards and lightbox
-const grid=document.getElementById('grid');
-PROJECTS.forEach(p=>{
-  const b=document.createElement('button');b.className='card';
-  b.innerHTML=`<img src="${p.img}" loading="lazy" decoding="async" alt="${p.t} screenshot"><div class="t"><b>${p.t}</b><span>${p.d}</span></div>`;
-  b.onclick=()=>openDoor(`<div class="shot"><img src="${p.img}" alt="${p.t} screenshot"><p>${p.t}: ${p.d}</p></div>`,'Come in, Sir Awais. Take a look.');
-  grid.appendChild(b);
-});
-grid.insertAdjacentHTML('beforeend',`<a class="card site" href="${SITE.url}" target="_blank" rel="noopener"><b>${SITE.t}</b><span>${SITE.d}</span><span>Open the site</span></a>`);
 
 // Letters as slides, opened by the door
 let cur=0;
@@ -541,11 +531,16 @@ document.getElementById('mus').onclick=e=>{muted=!muted;e.target.textContent=mut
 (function(){
   const img=document.getElementById('sImg'),num=document.getElementById('sNum'),T=document.getElementById('sT'),D=document.getElementById('sD'),dots=document.getElementById('sDots');
   let k=0,tm;
+  const th=document.getElementById('th');
+  th.innerHTML=PROJECTS.map((p,i)=>`<img src="${p.img}" alt="${p.t}" loading="lazy" data-i="${i}">`).join('');
+  th.onclick=e=>{const m=e.target.closest('img');if(m){show(+m.dataset.i);play()}};
+  document.getElementById('siteLink').href=SITE.url;
   dots.innerHTML=PROJECTS.map((_,i)=>`<i data-i="${i}"></i>`).join('');
   function show(i){k=i;const p=PROJECTS[i];img.style.opacity=0;
     setTimeout(()=>{img.src=p.img;img.alt=p.t;img.style.opacity=1},250);
     num.textContent='project '+(i+1)+' of '+PROJECTS.length;T.textContent=p.t;D.textContent=p.d;
-    dots.querySelectorAll('i').forEach((d,j)=>d.classList.toggle('on',j===i))}
+    dots.querySelectorAll('i').forEach((d,j)=>d.classList.toggle('on',j===i));
+    th.querySelectorAll('img').forEach((d,j)=>d.classList.toggle('on',j===i))}
   const play=()=>{clearInterval(tm);tm=setInterval(()=>show((k+1)%PROJECTS.length),4200)};
   dots.onclick=e=>{const d=e.target.closest('i');if(d){show(+d.dataset.i);play()}};
   const st=document.getElementById('stage');st.onmouseenter=()=>clearInterval(tm);st.onmouseleave=play;
