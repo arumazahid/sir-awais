@@ -291,6 +291,28 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
 .th{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 .th img{width:64px;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:6px;border:2px solid transparent;opacity:.5;cursor:pointer;transition:.3s}
 .th img.on{opacity:1;border-color:#C9A24B}
+
+/* ===== the book ===== */
+.book{position:relative;max-width:1000px;margin:0 auto;perspective:1800px}
+.spread{position:relative;display:grid;grid-template-columns:1fr 1.25fr;perspective:1800px;border-radius:8px 16px 16px 8px;border:1px solid #E3D3B3;
+  box-shadow:0 30px 60px rgba(120,100,60,.28),0 0 0 6px #7A5A34,0 0 0 8px #C9A24B}
+.pg{padding:38px 34px;min-height:420px;display:flex;flex-direction:column;justify-content:center}
+.pg.left{background:linear-gradient(90deg,#FBF3E2,#FFFBF2 80%,#EBDEC3);border-radius:8px 0 0 8px}
+.pg.right{background:linear-gradient(90deg,#EBDEC3,#FFFBF2 10%);border-radius:0 16px 16px 0;align-items:center}
+.pg.right .scr{width:100%}
+.leaf{position:absolute;top:0;bottom:0;left:44.44%;width:55.56%;z-index:3;transform-origin:left center;transform:rotateY(-180deg);backface-visibility:hidden;
+  background:linear-gradient(90deg,#E4D6B8,#FFFBF2 22%);border-radius:0 16px 16px 0;box-shadow:-14px 0 30px rgba(0,0,0,.18)}
+.leaf.turn{animation:turn .9s ease-in-out}
+@keyframes turn{from{transform:rotateY(0)}to{transform:rotateY(-180deg)}}
+.cover{position:absolute;inset:-8px;z-index:6;transform-origin:left center;backface-visibility:hidden;display:grid;place-content:center;text-align:center;cursor:pointer;
+  border-radius:8px 18px 18px 8px;border:3px solid #C9A24B;outline:8px solid #7A5A34;outline-offset:-14px;
+  background:radial-gradient(circle at 30% 20%,#2C3A63,#1E2A44 70%);color:#E8D9A8;transition:transform 1.4s cubic-bezier(.6,0,.2,1)}
+.cover.open{transform:rotateY(-170deg);pointer-events:none}
+.cover small{font:600 2rem Caveat,cursive;color:#F0DFA8}
+.cover b{display:block;font:600 clamp(2.6rem,9vw,5rem)/1.1 var(--serif);color:#E8D9A8;text-shadow:0 0 30px rgba(201,162,75,.5)}
+.cover span{display:block;margin-top:14px;letter-spacing:.25em;text-transform:uppercase;font-size:.8rem}
+.cover em{display:block;margin-top:26px;font:italic .95rem var(--serif);opacity:.7}
+@media(max-width:820px){.spread{grid-template-columns:1fr}.pg.left{border-radius:8px 8px 0 0}.pg.right{border-radius:0 0 16px 16px}.leaf{left:0;width:100%}}
 </style>
 </head>
 <body>
@@ -322,8 +344,15 @@ h1{background:linear-gradient(100deg,#1E2A44 0%,#1E2A44 38%,#B8893A 50%,#1E2A44 
   <p id="wishmsg" aria-live="polite"></p>
 </section>
 
-<section id="show"><h2>What your lessons became</h2><p class="lead">Each project, one by one.</p>
-  <div class="stage" id="stage"><div class="scr"><img id="sImg" alt=""></div><div class="cap"><small id="sNum"></small><h3 id="sT"></h3><p id="sD"></p><div class="sd" id="sDots"></div><div class="th" id="th"></div></div></div>
+<section id="show"><h2>What your lessons became</h2><p class="lead">A little book, with one chapter for every project.</p>
+  <div class="book" id="stage">
+    <div class="cover" id="cover"><small>Welcome</small><b>Sir Awais</b><span>What your lessons became</span><em>opening the book...</em></div>
+    <div class="spread">
+      <div class="pg left cap"><small id="sNum"></small><h3 id="sT"></h3><p id="sD"></p><div class="sd" id="sDots"></div><div class="th" id="th"></div></div>
+      <div class="pg right"><div class="scr"><img id="sImg" alt=""></div></div>
+      <div class="leaf" id="leaf"></div>
+    </div>
+  </div>
   <p style="text-align:center;margin-top:24px"><a class="btn gold" id="siteLink" href="#" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Visit Skill Filled Academia</a></p></section>
 
 <section id="path"><h2>The road so far</h2><p class="lead">From a student in your class to a builder.</p><div class="tl" id="tl"><i class="fill"></i></div></section>
@@ -536,15 +565,22 @@ document.getElementById('mus').onclick=e=>{muted=!muted;e.target.textContent=mut
   th.onclick=e=>{const m=e.target.closest('img');if(m){show(+m.dataset.i);play()}};
   document.getElementById('siteLink').href=SITE.url;
   dots.innerHTML=PROJECTS.map((_,i)=>`<i data-i="${i}"></i>`).join('');
-  function show(i){k=i;const p=PROJECTS[i];img.style.opacity=0;
-    setTimeout(()=>{img.src=p.img;img.alt=p.t;img.style.opacity=1},250);
-    num.textContent='project '+(i+1)+' of '+PROJECTS.length;T.textContent=p.t;D.textContent=p.d;
-    dots.querySelectorAll('i').forEach((d,j)=>d.classList.toggle('on',j===i));
-    th.querySelectorAll('img').forEach((d,j)=>d.classList.toggle('on',j===i))}
-  const play=()=>{clearInterval(tm);tm=setInterval(()=>show((k+1)%PROJECTS.length),4200)};
+  function setPage(i){k=i;const p=PROJECTS[i];img.src=p.img;img.alt=p.t;num.textContent='chapter '+(i+1)+' of '+PROJECTS.length;T.textContent=p.t;D.textContent=p.d;
+    dots.querySelectorAll('i').forEach((d,j)=>d.classList.toggle('on',j===i));th.querySelectorAll('img').forEach((d,j)=>d.classList.toggle('on',j===i))}
+  let opened=false;
+  const leaf=document.getElementById('leaf'),cover=document.getElementById('cover'),st=document.getElementById('stage');
+  function show(i){
+    if(!opened)return;
+    leaf.classList.remove('turn');void leaf.offsetWidth;leaf.classList.add('turn');
+    setTimeout(()=>setPage(i),450);
+  }
+  const play=()=>{clearInterval(tm);if(opened)tm=setInterval(()=>show((k+1)%PROJECTS.length),4500)};
   dots.onclick=e=>{const d=e.target.closest('i');if(d){show(+d.dataset.i);play()}};
-  const st=document.getElementById('stage');st.onmouseenter=()=>clearInterval(tm);st.onmouseleave=play;
-  show(0);play();
+  st.onmouseenter=()=>clearInterval(tm);st.onmouseleave=play;
+  function openBook(){if(opened)return;opened=true;cover.classList.add('open');setTimeout(play,1200)}
+  cover.onclick=openBook;
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){o.disconnect();setTimeout(openBook,1800)}},{threshold:.25}).observe(st);
+  setPage(0);
   const steps=[["A student in your class","It started the day I became your student and began learning from you."],
    ["Your lessons stuck","Every idea I had traced back to something you taught."],
    ["Five agents and a website","Shikari, marketing, admissions, recruitment, carousels, and Skill Filled Academia."],
