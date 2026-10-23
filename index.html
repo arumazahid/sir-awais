@@ -9,21 +9,22 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F5F7FA; --panel:#fff; --ink:#13203A; --muted:#5B6779;
-  --line:#DDE3EC; --blue:#1E4ED8; --sky:#E6EEFB;
+  --bg:#FBF8FF; --panel:#fff; --ink:#13203A; --muted:#5B6779;
+  --line:#E4DCF3; --blue:#1E4ED8; --sky:#E6EEFB;
+  --coral:#FF6B6B; --sun:#FFC83D; --mint:#2FC4A0; --lilac:#9B7BFF; --pink:#FF8FB1;
   --serif:'Newsreader',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
   --mono:ui-monospace,Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans)}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);overflow-x:hidden}
 a{color:var(--blue)}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
 /* hero */
 .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:72px 0 56px}
-.hero p.hi{color:var(--muted);margin-bottom:12px}
+.hero p.hi{display:inline-block;background:var(--sun);font-weight:700;padding:6px 16px;border-radius:999px;margin-bottom:16px}
 h1{font:600 clamp(2.4rem,5.4vw,4rem)/1.08 var(--serif);letter-spacing:-.01em}
 .sub{color:var(--muted);margin:18px 0 28px;max-width:46ch}
 .term{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;font:15px/1.7 var(--mono);min-height:210px}
@@ -33,6 +34,55 @@ h1{font:600 clamp(2.4rem,5.4vw,4rem)/1.08 var(--serif);letter-spacing:-.01em}
 @keyframes blink{50%{opacity:0}}
 .photo{aspect-ratio:4/5;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--sky)}
 .photo img{width:100%;height:100%;object-fit:cover;object-position:0 55%;display:block}
+
+/* party */
+.bunting{display:flex;justify-content:center;overflow:hidden;height:46px}
+.bunting i{flex:0 0 44px;height:40px;clip-path:polygon(0 0,100% 0,50% 100%)}
+.hero,.wish{position:relative}
+.balloon{position:absolute;width:54px;height:81px;animation:bob 5s ease-in-out infinite alternate;pointer-events:none}
+@keyframes bob{to{transform:translateY(-16px) rotate(3deg)}}
+.fl{width:44px;height:44px;position:absolute}
+.photo-wrap{position:relative}
+.photo{border:6px solid #fff;box-shadow:0 0 0 4px var(--pink)}
+.wish{text-align:center;background:linear-gradient(135deg,#FFF1C9,#FFD9E6 60%,#E3DAFF);border-radius:20px;padding:40px 20px;margin:24px 0}
+.wish .lead{margin-inline:auto}
+.cake{width:min(280px,70%);height:auto;display:block;margin:0 auto 16px}
+.flame{transform-origin:50% 100%;animation:flick .5s ease-in-out infinite alternate;transition:opacity .4s}
+@keyframes flick{to{transform:scale(1.15) rotate(4deg)}}
+.out .flame{opacity:0}
+.btn{font:700 1rem var(--sans);background:var(--ink);color:#fff;border:0;border-radius:999px;padding:12px 24px;cursor:pointer}
+#wishmsg{min-height:1.6em;margin-top:14px;font:600 1.3rem var(--serif)}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.letter .fl{right:-8px;top:-8px;width:64px;height:64px}
+
+/* door */
+#door{position:fixed;inset:0;z-index:60;display:none;background:rgba(19,32,58,.78);padding:56px 20px 32px;overflow:auto}
+#door.on{display:flex}
+.scene{display:flex;gap:40px;align-items:center;max-width:980px;width:100%;margin:auto}
+.frame{position:relative;flex:0 0 min(300px,70vw);aspect-ratio:3/4;background:#2a3246;padding:12px;border-radius:6px 6px 0 0;box-shadow:0 20px 50px rgba(0,0,0,.5);perspective:900px}
+.room{position:absolute;inset:12px;overflow:hidden;background:#fff6dc}
+.room img{width:100%;height:100%;object-fit:cover;object-position:50% 70%;transform:scale(.9);filter:brightness(.55);transition:transform 1.4s .5s ease-out,filter 1.2s .4s}
+.room::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(255,236,190,.95),transparent 70%);transition:opacity 1.6s .5s}
+.leaf{position:absolute;top:12px;bottom:12px;width:calc(50% - 12px);background:linear-gradient(90deg,#3b2f2a,#5a4637 50%,#3b2f2a);box-shadow:inset 0 0 0 6px rgba(0,0,0,.18);transition:transform 1.2s cubic-bezier(.5,0,.2,1)}
+.leaf.l{left:12px;transform-origin:left}
+.leaf.r{right:12px;transform-origin:right}
+.leaf::after{content:"";position:absolute;top:50%;width:10px;height:10px;border-radius:50%;background:#c9a24b}
+.leaf.l::after{right:10px}
+.leaf.r::after{left:10px}
+.open .leaf.l{transform:rotateY(-105deg)}
+.open .leaf.r{transform:rotateY(105deg)}
+.open .room img{transform:scale(1);filter:none}
+.open .room::after{opacity:0}
+.say{position:absolute;left:50%;bottom:-20px;transform:translateX(-50%);background:var(--sun);color:var(--ink);font-weight:700;padding:8px 16px;border-radius:999px;white-space:nowrap;opacity:0;transition:opacity .4s 1.6s}
+.open .say{opacity:1}
+.inside{flex:1;min-width:0;opacity:0;transform:translateX(-12px);transition:opacity .6s 1.9s,transform .6s 1.9s}
+.open .inside{opacity:1;transform:none}
+.shot{background:#fff;border-radius:12px;padding:10px 10px 14px}
+.shot img{width:100%;border-radius:8px;display:block}
+.shot p{padding:10px 6px 0;font-weight:500}
+.inside .letter{min-height:0}
+#shut{position:fixed;top:14px;right:14px;z-index:61;border:0;border-radius:999px;padding:10px 18px;font:700 1rem var(--sans);background:#fff;color:var(--ink);cursor:pointer}
+@media(max-width:820px){.scene{flex-direction:column;gap:40px}}
 
 /* sections */
 section{padding:56px 0}
@@ -45,18 +95,24 @@ h2{font:600 clamp(1.7rem,3.4vw,2.4rem)/1.15 var(--serif);margin-bottom:8px}
 .card b{display:block;font-weight:700}
 .card span{color:var(--muted);font-size:.93rem}
 .card.site{display:flex;flex-direction:column;justify-content:center;background:var(--sky);padding:20px}
-.card:hover{border-color:var(--blue)}
+.card{transition:transform .2s,border-color .2s}
+.card:hover{border-color:var(--blue);transform:translateY(-3px)}
+.grid .card:nth-child(1){border-top:5px solid var(--coral)}
+.grid .card:nth-child(2){border-top:5px solid var(--sun)}
+.grid .card:nth-child(3){border-top:5px solid var(--mint)}
+.grid .card:nth-child(4){border-top:5px solid var(--lilac)}
+.grid .card:nth-child(5){border-top:5px solid var(--pink)}
 
 /* letters */
 .tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
-.tab{font:500 .95rem var(--sans);padding:10px 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
-.tab[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.letter{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:12px;padding:32px clamp(20px,4vw,44px);min-height:200px}
+.tab{font:500 .95rem var(--sans);padding:10px 16px;border-radius:999px;border:2px solid var(--c);background:var(--panel);color:var(--ink);cursor:pointer}
+.tab[aria-selected=true]{background:var(--c);font-weight:700}
+.letter{background:var(--panel);border:1px solid var(--line);border-left:8px solid var(--c,var(--blue));border-radius:12px;padding:32px clamp(20px,4vw,44px);min-height:200px;position:relative;overflow:hidden}
 .letter h3{font:600 1.4rem var(--serif);margin-bottom:12px}
 .letter p{font:1.2rem/1.75 var(--serif);max-width:60ch}
 .letter .by{margin-top:18px;font-style:italic;color:var(--muted)}
 .letter.in{animation:open .45s ease}
-@keyframes open{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes open{from{opacity:0;transform:scaleY(.6) translateY(-10px);transform-origin:top}to{opacity:1;transform:none}}
 .empty{color:var(--muted)}
 
 /* lightbox */
@@ -68,25 +124,55 @@ footer{padding:40px 0 64px;color:var(--muted);border-top:1px solid var(--line);m
 
 @media(max-width:820px){
   .hero{grid-template-columns:1fr;gap:32px;padding-top:40px}
-  .photo{max-width:360px}
+  .photo-wrap{max-width:360px}
+  .balloon{display:none}
   .grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:540px){.grid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="fl" viewBox="0 0 40 40"><g fill="currentColor"><circle cx="20" cy="9" r="8"/><circle cx="31" cy="17" r="8"/><circle cx="27" cy="30" r="8"/><circle cx="13" cy="30" r="8"/><circle cx="9" cy="17" r="8"/></g><circle cx="20" cy="20" r="6" fill="#FFC83D"/></symbol>
+  <symbol id="bl" viewBox="0 0 40 60"><ellipse cx="20" cy="20" rx="16" ry="19" fill="currentColor"/><path d="M20 39l-4 6h8z" fill="currentColor"/><path d="M20 45c-5 6 5 8 0 14" stroke="#9aa3b2" fill="none"/></symbol>
+</svg>
+<canvas id="fx"></canvas>
+<div class="bunting" id="bunting" aria-hidden="true"></div>
 <main class="wrap">
 
 <header class="hero">
+  <svg class="balloon" viewBox="0 0 40 60" style="left:-34px;top:8px;color:var(--coral)" aria-hidden="true"><use href="#bl"/></svg>
+  <svg class="balloon" viewBox="0 0 40 60" style="right:-30px;top:40%;color:var(--sun);animation-delay:-2s" aria-hidden="true"><use href="#bl"/></svg>
+  <svg class="balloon" viewBox="0 0 40 60" style="left:46%;top:-18px;color:var(--lilac);animation-delay:-3.5s" aria-hidden="true"><use href="#bl"/></svg>
   <div>
     <p class="hi">Belated Happy Birthday, Sir</p>
     <h1>Everything on this page started with you.</h1>
     <p class="sub">Six projects, built with what you taught me. I wanted you to see where your lessons went.</p>
     <div class="term" id="term" aria-label="Terminal"></div>
   </div>
-  <div class="photo"><img src="assets/sir.png" alt="Sir at his desk"></div>
+  <div class="photo-wrap">
+    <div class="photo"><img src="assets/sir.png" alt="Sir at his desk"></div>
+    <svg class="fl" viewBox="0 0 40 40" style="left:-18px;top:-18px;color:var(--pink)" aria-hidden="true"><use href="#fl"/></svg>
+    <svg class="fl" viewBox="0 0 40 40" style="right:-16px;bottom:-16px;color:var(--lilac)" aria-hidden="true"><use href="#fl"/></svg>
+  </div>
 </header>
+
+<section class="wish" id="wish">
+  <h2>Make a wish, Sir</h2>
+  <p class="lead">Blow out the candles.</p>
+  <svg class="cake" viewBox="0 0 200 170" role="img" aria-label="Birthday cake">
+    <ellipse cx="100" cy="152" rx="92" ry="10" fill="#D9D2EE"/>
+    <rect x="20" y="105" width="160" height="45" rx="8" fill="#FF6B6B"/><rect x="20" y="105" width="160" height="10" rx="5" fill="#fff"/>
+    <rect x="45" y="70" width="110" height="40" rx="8" fill="#FF8FB1"/><rect x="45" y="70" width="110" height="10" rx="5" fill="#fff"/>
+    <rect x="70" y="40" width="60" height="35" rx="8" fill="#FFC83D"/><rect x="70" y="40" width="60" height="10" rx="5" fill="#fff"/>
+    <circle cx="40" cy="130" r="4" fill="#fff"/><circle cx="100" cy="130" r="4" fill="#fff"/><circle cx="160" cy="130" r="4" fill="#fff"/>
+    <rect x="88" y="22" width="5" height="18" fill="#2FC4A0"/><rect x="100" y="22" width="5" height="18" fill="#9B7BFF"/><rect x="112" y="22" width="5" height="18" fill="#1E4ED8"/>
+    <ellipse class="flame" cx="90.5" cy="15" rx="4" ry="7" fill="#FF9F1C"/><ellipse class="flame" cx="102.5" cy="15" rx="4" ry="7" fill="#FF9F1C"/><ellipse class="flame" cx="114.5" cy="15" rx="4" ry="7" fill="#FF9F1C"/>
+  </svg>
+  <button class="btn" id="blow">Blow the candles</button>
+  <p id="wishmsg" aria-live="polite"></p>
+</section>
 
 <section id="work">
   <h2>What your lessons became</h2>
@@ -98,13 +184,19 @@ footer{padding:40px 0 64px;color:var(--muted);border-top:1px solid var(--line);m
   <h2>Open when...</h2>
   <p class="lead">A few letters for you. Open them in any order, and the last one at the end.</p>
   <div class="tabs" id="tabs" role="tablist"></div>
-  <div class="letter" id="letter" aria-live="polite"><p class="empty">Pick a letter above.</p></div>
+  
 </section>
 
 </main>
 <footer><div class="wrap">Made with code, by Aruma.</div></footer>
 
-<dialog id="box"><button id="x" aria-label="Close">Close</button><img id="big" alt=""></dialog>
+<div id="door" role="dialog" aria-modal="true" aria-label="Opened by Sir">
+  <button id="shut">Close</button>
+  <div class="scene">
+    <div class="frame"><div class="room"><img src="assets/sir.png" alt="Sir welcoming you"></div><div class="leaf l"></div><div class="leaf r"></div><div class="say" id="say"></div></div>
+    <div class="inside" id="inside"></div>
+  </div>
+</div>
 
 <script>
 // Edit the content here
@@ -118,12 +210,59 @@ const PROJECTS=[
 const SITE={t:"Skill Filled Academia",d:"You taught me, I built it anyway.",url:"https://skill-filled-academia.skillfilled.workers.dev/"};
 
 const LETTERS=[
- {t:"Open when you need a smile",b:"Right now an agent I built is posting content while I sleep. You taught me that. If this does not make you smile, I will build another one."},
- {t:"Open when you doubt your impact",b:"Every project on this page exists because you showed me where to start. None of them were assigned. I built them because you made me believe I could."},
- {t:"Open on a tough day",b:"Teachers rarely see what happens after the lesson ends. I wanted you to see it. Your lessons are still running, in my code, every single day."},
- {t:"Open when you see my work",b:"Scroll up and look at the projects again. Each one began with something you explained to me patiently. This is what your time turned into."},
- {t:"Open last",b:"Thank you for the patience, the time and the push. I am sorry this is late, but I wanted it to be worth the wait. Happy belated birthday, Sir."}
+ {t:"Open for a laugh",c:"var(--sun)",b:"Breaking news from the hostel: the chai has more water than milk. Scientists are still searching for the tea. And yet you drink it every single day without complaint. That is not a habit, Sir, that is discipline. Please judge my bugs with the same patience you show that chai."},
+ {t:"Open when you miss home",c:"var(--pink)",b:"Six months is a long time to be away from home, and I know it is on your mind. A hostel room and watery chai cannot replace family. But you have a whole group of students who think of you as family. Wherever home is, it is lucky to have you."},
+ {t:"Open when you doubt your impact",c:"var(--mint)",b:"Count with me: Shikari, a marketing agent, an admissions agent, a recruitment system, a carousel studio, and one website nobody assigned. Six things that did not exist before your classes. You told me once, \"Sky is the limit.\" Sir, I am only starting to look up."},
+ {t:"Open for the team page",c:"#8EC5FF",b:"You put my name on your team, next to people I look up to. I read that page twice, then a third time. You said you plan to train me and make me grow more. It is working, Sir. Thank you for trusting a student with that."},
+ {t:"Open for the successor story",c:"#FF9F5A",b:"You called me your successor, and then you left the chair yourself. Sir, that is a captain naming a vice-captain and walking off the field mid-match. Do not worry, I am keeping your seat warm. The chai is on you."},
+ {t:"Open last",c:"var(--coral)",b:"Thank you for the patience, the time and the push. I am sorry this wish is late, but I wanted it to be worth the wait. Happy belated birthday, Sir."}
 ];
+
+// Door: Sir's portrait welcomes him in
+const door=document.getElementById('door'),inside=document.getElementById('inside'),say=document.getElementById('say');
+function openDoor(html,line){
+  inside.innerHTML=html;say.textContent=line;
+  door.classList.remove('open');door.classList.add('on');
+  void door.offsetWidth;
+  setTimeout(()=>door.classList.add('open'),60);
+  document.getElementById('shut').focus();
+}
+function shut(){door.classList.remove('on','open')}
+document.getElementById('shut').onclick=shut;
+door.onclick=e=>{if(e.target===door)shut()};
+addEventListener('keydown',e=>{if(e.key==='Escape')shut()});
+
+// Bunting flags
+const cols=['#FF6B6B','#FFC83D','#2FC4A0','#9B7BFF','#FF8FB1','#1E4ED8'];
+const bun=document.getElementById('bunting');
+for(let i=0;i<40;i++){const f=document.createElement('i');f.style.background=cols[i%cols.length];bun.appendChild(f)}
+
+// Confetti
+const cv=document.getElementById('fx'),cx=cv.getContext('2d');
+let bits=[],going=false;
+function fit(){cv.width=innerWidth;cv.height=innerHeight}
+fit();addEventListener('resize',fit);
+function run(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  bits.forEach(b=>{b.vy+=.35;b.x+=b.vx;b.y+=b.vy;b.r+=.2;cx.save();cx.translate(b.x,b.y);cx.rotate(b.r);cx.fillStyle=b.c;cx.fillRect(-b.s/2,-b.s/2,b.s,b.s*.6);cx.restore()});
+  bits=bits.filter(b=>b.y<cv.height+20);
+  if(bits.length)requestAnimationFrame(run);else{going=false;cx.clearRect(0,0,cv.width,cv.height)}
+}
+function burst(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  for(let i=0;i<120;i++)bits.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-.5)*14,vy:Math.random()*-12-2,s:6+Math.random()*6,c:cols[i%cols.length],r:Math.random()*6});
+  if(!going){going=true;run()}
+}
+setTimeout(burst,600);
+
+// Cake
+const wishEl=document.getElementById('wish'),msg=document.getElementById('wishmsg'),blow=document.getElementById('blow');
+blow.onclick=()=>{
+  const out=wishEl.classList.toggle('out');
+  blow.textContent=out?'Light them again':'Blow the candles';
+  msg.textContent=out?'May every wish you make come true, Sir.':'';
+  if(out)burst();
+};
 
 // Terminal typing, plays once
 const lines=[["who_taught_me",'"Sir"'],["projects_built","6"],["status",'"still learning, still building"'],["wish",'"Happy belated birthday, Sir."']];
@@ -147,26 +286,23 @@ else{
 }
 
 // Project cards and lightbox
-const grid=document.getElementById('grid'),box=document.getElementById('box'),big=document.getElementById('big');
+const grid=document.getElementById('grid');
 PROJECTS.forEach(p=>{
   const b=document.createElement('button');b.className='card';
   b.innerHTML=`<img src="${p.img}" alt="${p.t} screenshot"><div class="t"><b>${p.t}</b><span>${p.d}</span></div>`;
-  b.onclick=()=>{big.src=p.img;big.alt=p.t;box.showModal()};
+  b.onclick=()=>openDoor(`<div class="shot"><img src="${p.img}" alt="${p.t} screenshot"><p>${p.t}: ${p.d}</p></div>`,'Come in, Sir. Take a look.');
   grid.appendChild(b);
 });
 grid.insertAdjacentHTML('beforeend',`<a class="card site" href="${SITE.url}" target="_blank" rel="noopener"><b>${SITE.t}</b><span>${SITE.d}</span><span>Open the site</span></a>`);
-document.getElementById('x').onclick=()=>box.close();
-box.onclick=e=>{if(e.target===box)box.close()};
 
 // Letters
-const tabs=document.getElementById('tabs'),letter=document.getElementById('letter');
+const tabs=document.getElementById('tabs');
 LETTERS.forEach((l,i)=>{
-  const t=document.createElement('button');t.className='tab';t.role='tab';t.textContent=l.t;t.setAttribute('aria-selected','false');
+  const t=document.createElement('button');t.className='tab';t.style.setProperty('--c',l.c);t.textContent=l.t;
   t.onclick=()=>{
-    tabs.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));
-    t.setAttribute('aria-selected','true');
-    letter.className='letter';void letter.offsetWidth;letter.className='letter in';
-    letter.innerHTML=`<h3>${l.t}</h3><p>${l.b}</p>`+(i===LETTERS.length-1?'<p class="by">With respect, Aruma</p>':'');
+    const last=i===LETTERS.length-1;
+    openDoor(`<div class="letter" style="--c:${l.c}"><svg class="fl" viewBox="0 0 40 40" style="color:${l.c}" aria-hidden="true"><use href="#fl"/></svg><h3>${l.t}</h3><p>${l.b}</p>${last?'<p class="by">With respect, Aruma</p>':''}</div>`,'Come in, Sir. This one is for you.');
+    if(last)setTimeout(burst,2000);
   };
   tabs.appendChild(t);
 });

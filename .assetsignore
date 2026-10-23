@@ -1,0 +1,6 @@
+.git
+.wrangler
+wrangler.jsonc
+firebase.json
+.gitignore
+.assetsignore
